@@ -1,0 +1,76 @@
+URGENT
+-------------------------------------------------------------------
+
+Put MYOD code into svn and program it to automatically save the MYOD data in svn too.
+
+SOON
+---------------------------------------------------------------------
+
+implement scheduled payments
+	do a view/edit/delete scheduled payments gui
+	add internet payments
+finish implementation of trans_hist
+	implement filters
+implement GUIs for recording and displaying description of loans
+	and then put $1100 against John. 15/10/12. Ubank - Others.
+	John, Tom owe another $70 for xbox, ING Direct
+		- John returned $300 29/10/12 Cash
+		                $200 5/9/12
+				$200 12/11/12
+		- John returned $470 31/12/12
+Look into add_data's reverse_sort.
+	Is there any point to it?
+	Does trans_hist violate the order assumption once a item is deleted
+	Does reschedule violate the order assumption
+Implement save_data and change all instances of existing codes use of save
+
+
+
+LATER
+---------------------------------------------------------------------
+
+Improve get_ functions significantly to make MYOD's base more flexible and reliable
+ - consider making categories data that is loaded instead of hardcoded.
+ - implemented as a numeric lookup table
+ - make functions for adding categories (coded numbers should be automatically assigned)
+ - can make function for removing a category (number is no longer used, string kept in history, but not returned in struct)
+ - can make function for replacing category (new string is assigned to existing code) 
+ - make wrapper GUIs for these extended functions. Allowing a user to control categories.
+For the category GUI, must be a facility of highlighting some special meaning to different 
+	categories. These categories in the list should appear a different colour. For 
+	example, if certain categories should be accompanied by a note (such as loans)
+Do a "where's my money going" gui
+Make a scheduled payments gui - to view and delete scheduled payments
+R2012a MATLAB help warns behaviour of ismember will change look into effect for me
+Review if get_freq need exist or should be hardcoded in the GUIs
+consider adding a custom option to freq in add_data:
+	Every "user types number" "user selects days, months, years"
+	This will be easy to program since are values of 'field' and 'quantity'
+
+ONE DAY
+---------------------------------------------------------------------
+
+Implement reminders in MYOD, e.g., every month a pop-up until you 
+	acknowledge it to check the balance of your phone bill
+Reorder 'list's' so that 'others' always appears last in add_data
+Add little pop up calendars for date selections
+consider pretty pictures for the guis
+lay out gui elements with spacing according to my rules
+Smart Salary should be a fund. When using it, expenses are recorded in
+	another matrix (no income needed).
+Clock labour
+make GUIs resizable
+try to make rows in trans_hist light up when scrolled over
+reorder 'lists' such that 'Others' always are displayed last
+	but ensure index won't be affected
+have prev and next pages for trans_hist?
+when MYOD close; all sub-guis should close
+look into possibility of converting my MYOD program into an executable - RT package
+look into option of bypassing GUIDE and programming GUI from scratch in MATLAB
+
+
+
+
+
+MYOD
+myod007
