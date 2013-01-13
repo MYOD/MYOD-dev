@@ -1,8 +1,6 @@
 URGENT
 -------------------------------------------------------------------
 
-Put MYOD code into svn and program it to automatically save the MYOD data in svn too.
-
 SOON
 ---------------------------------------------------------------------
 
