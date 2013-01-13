@@ -9,7 +9,10 @@ function reschedule()
 
 % load scheduled payments; go through one at a time
 scheduled = load_data('sched');
+sched_updated = false; %boolean: true if scheduled data should be updated
 for i = 1:size(scheduled,1)
+    
+   
     
     increment = scheduled(i,data_num('s_increment'));
     switch scheduled(i,data_num('s_field'))
@@ -32,6 +35,7 @@ for i = 1:size(scheduled,1)
         cashflow = [cashflow; scheduled(i,1:data_num('columns'))];
         cashflow(end, data_num('date')) = datet; %update date
         quantity = quantity + increment; %update quantity
+        sched_updated = true; % now there is a reason to update scheduled
         datet = addtodate(date0,quantity,field); %next scheduled date        
     end
     
@@ -81,7 +85,15 @@ for i = 1:size(scheduled,1)
         save_data(income,'inc');
     end
     
-    scheduled(i,data_num('s_quantity')) = quantity; %save updated quantity
+    scheduled(i,data_num('s_quantity')) = quantity; %update quantity
+    
+end
+if sched_updated
     save_data(scheduled,'sched');
 end
 end
+
+
+
+
+

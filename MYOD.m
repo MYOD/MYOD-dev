@@ -22,7 +22,7 @@ function varargout = MYOD(varargin)
 
 % Edit the above text to modify the response to help MYOD
 
-% Last Modified by GUIDE v2.5 18-Sep-2012 21:19:45
+% Last Modified by GUIDE v2.5 13-Jan-2013 19:33:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -116,10 +116,43 @@ end
 guidata(hObject, handles); % update handles
 
 
+% function: figure1_CloseRequestFcn
+% last modified: 13/01/13
+% description: code executes when MYOD is closed
+% inputs: hObject - handle to figure1 (see GCBO)
+%         eventdata - to be defined in a future version of MATLAB
+%         handles - structure with handles and user data (see GUIDATA)
+% NOTE: Please note that figure1_CloseRequestFcn is not general as 
+%       behaviour is unique to my requirements
+% NOTE: figure1_CloseRequestFcn has a dependency on git being installed on the machine
+%       and in the path.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   WARNING CODE IN HERE IS NOT GENERAL AND INTENDED FOR MY PC ONLY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+curr_dir = pwd();
+if strcmp(curr_dir,data_num('rel_path'))
+    use_git = true; % boolean true if automatically update stuff in git
+else
+    use_git = false;
+end
 
-
+if use_git
+    %for the silencing of system commands
+    if ispc
+        oblivion = 'NUL';
+    else
+        oblivion = '/dev/null';
+    end
+    data_path = fullfile(data_num('rel_path'),data_num('path'));
+    r = cd(data_path);
+    system(['git push origin master > ' oblivion]);
+    cd(r);
+end
+% closes the figure
+delete(hObject);
 
 
 

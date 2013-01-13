@@ -32,36 +32,40 @@ data_path = fullfile(data_num('rel_path'),data_num('path'));
 
 switch descriptor
     case 'inc'
-        save(fullfile(data_num('path'),'income.mat'),'data');
+        income = data;
+        save(fullfile(data_num('path'),'income.mat'),'income');
         if use_git
-            system(data_num('rel_drive'));
-            system(['cd ' data_path]);
+            r = cd(data_path);
             system(['git add income.mat > ' oblivion]);
             system(['git commit -m "MYOD auto income update" > ' oblivion]);
+            cd(r);
         end
     case 'exp'
-        save(fullfile(data_num('path'),'expense.mat'),'data');
+        expense = data;
+        save(fullfile(data_num('path'),'expense.mat'),'expense');
         if use_git
-            system(data_num('rel_drive'));
-            system(['cd ' data_path]);
+            r = cd(data_path);
             system(['git add expense.mat > ' oblivion]);
             system(['git commit -m "MYOD auto expense update" > ' oblivion]);
+            cd(r);
         end
     case 'sched'
-        save(fullfile(data_num('path'),'scheduled.mat'),'data');
+        scheduled = data;
+        save(fullfile(data_num('path'),'scheduled.mat'),'scheduled');
         if use_git
-            system(data_num('rel_drive'));
-            system(['cd ' data_path]);
+            r = cd(data_path);
             system(['git add scheduled.mat > ' oblivion]);
             system(['git commit -m "MYOD auto scheduled update" > ' oblivion]);
+            cd(r);
         end
     case 'exc'
-        save(fullfile(data_num('path'),'exclusions.mat'),'data');
+        exclusions = data;
+        save(fullfile(data_num('path'),'exclusions.mat'),'exclusions');
         if use_git
-            system('D:');
-            system(data_num('rel_drive'));
-            system(['cd ' data_path]);
+            r = cd(data_path);
+            system(['git add exclusions.mat > ' oblivion]);
             system(['git commit -m "MYOD auto exclusions update" > ' oblivion]);            
+            cd(r);
         end
     otherwise
         errordlg('Invalid Save Descriptor. PLEASE TELL PETER');
