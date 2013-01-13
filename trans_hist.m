@@ -808,7 +808,7 @@ function show_all_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % function: delete_Callback
-% last modified: 4/12/12
+% last modified: 13/01/13
 % description: Executes on button press in delete
 % inputs: hObject - handle to delete (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -861,7 +861,7 @@ else
                     'data. PLEASE TELL PETER'], 'CAUTION');
             end
             income(bad_idx,:) = []; % delete
-            save(fullfile(data_num('path'), 'income.mat'),'income');
+            save_data(income,'inc');
         end
         
         % delete expense elements
@@ -874,7 +874,7 @@ else
                     'data. PLEASE TELL PETER'], 'CAUTION');
             end
             expense(bad_idx,:) = []; % delete
-            save(fullfile(data_num('path'), 'expense.mat'),'expense');
+            save_data(expense,'exp');
         end
         
         % update summary

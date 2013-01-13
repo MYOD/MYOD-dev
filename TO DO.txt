@@ -42,10 +42,8 @@ For the category GUI, must be a facility of highlighting some special meaning to
 Do a "where's my money going" gui
 Make a scheduled payments gui - to view and delete scheduled payments
 R2012a MATLAB help warns behaviour of ismember will change look into effect for me
-Review if get_freq need exist or should be hardcoded in the GUIs
-consider adding a custom option to freq in add_data:
-	Every "user types number" "user selects days, months, years"
-	This will be easy to program since are values of 'field' and 'quantity'
+make save_data general for all computers including the optional use of automating git.
+
 
 ONE DAY
 ---------------------------------------------------------------------

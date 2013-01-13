@@ -1,5 +1,5 @@
 % function: reschedule
-% last modified: 12/01/13
+% last modified: 13/01/13
 % description: It goes through entries in scheduled.mat. Check if they have
 %              payments, not yet effected, in the past. If so, executes
 %              those updating income.mat, expense.mat as necessary.
@@ -57,7 +57,7 @@ for i = 1:size(scheduled,1)
         expense = [expense; cashflow]; %add unique entries
 
 
-        save(fullfile(data_num('path'), 'expense.mat'),'expense');
+        save_data(expense,'exp');
     elseif size(cashflow,1) % income
         income = load_data('inc');
         
@@ -78,10 +78,10 @@ for i = 1:size(scheduled,1)
         end
         income = [income; cashflow]; %add unique entries
        
-        save(fullfile(data_num('path'), 'income.mat'),'income');
+        save_data(income,'inc');
     end
     
     scheduled(i,data_num('s_quantity')) = quantity; %save updated quantity
-    save(fullfile(data_num('path'), 'scheduled.mat'),'scheduled');
+    save_data(scheduled,'sched');
 end
 end

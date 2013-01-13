@@ -208,7 +208,7 @@ end
 
 
 % function: done_Callback
-% last modified: 10/01/13
+% last modified: 13/01/13
 % description: Executes on button press in done
 % inputs: hObject - handle to done (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -315,7 +315,7 @@ if get(handles.scheduled,'value') %scheduled payment was ticked
         scheduled = load_data('sched');
         
         scheduled = [scheduled; new_sched];
-        save(fullfile(data_num('path'),'scheduled.mat'),'scheduled');
+        save_data(scheduled,'sched');
         
         % update schedule data if need be
         reschedule();
@@ -363,7 +363,7 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
         end
     end
             
-    save(fullfile(data_num('path'), 'expense.mat'),'expense');
+    save_data(expense,'exp');
     main_handles = guidata(handles.main_hObject);
     summarise(main_handles);
     delete(handles.figure1);
@@ -405,7 +405,7 @@ elseif ~void && newEntry(data_num('amount')) < 0 % save income
         end
     end
 
-    save(fullfile(data_num('path'), 'income.mat'),'income');
+    save_data(income,'inc');
     main_handles = guidata(handles.main_hObject);
     summarise(main_handles);
     delete(handles.figure1);
