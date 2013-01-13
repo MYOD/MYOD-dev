@@ -71,8 +71,3 @@ look into option of bypassing GUIDE and programming GUI from scratch in MATLAB
 
 
 
-
-MYOD
-myod007
-to get repository:
-git clone git://github.com/MYOD/MYOD-dev.git
