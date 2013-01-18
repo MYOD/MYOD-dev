@@ -1,11 +1,21 @@
 URGENT
 -------------------------------------------------------------------
 
-test git function in MYOD released version carefully!!!
+why dosen't it show days MYOD is old anymore?
+old numbers:
+1460.73
+918.99
+128
+
+also, scheduled has wrong health insurance data
 
 SOON
 ---------------------------------------------------------------------
 
+add transaction number column to MYOD data (and manually add to previous data)
+	this offers future potential
+	now every transaction has a reference number
+	could make separate struct to have comments with certain transactions, etc.
 implement scheduled payments
 	do a view/edit/delete scheduled payments gui
 	add internet payments

@@ -117,7 +117,7 @@ guidata(hObject, handles); % update handles
 
 
 % function: figure1_CloseRequestFcn
-% last modified: 13/01/13
+% last modified: 18/01/13
 % description: code executes when MYOD is closed
 % inputs: hObject - handle to figure1 (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -140,6 +140,8 @@ else
 end
 
 if use_git
+    set(handles.summary,'string',...
+        sprintf('PLEASE WAIT!\nMYOD data being uploaded to web'));
     %for the silencing of system commands
     if ispc
         oblivion = 'NUL';
