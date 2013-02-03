@@ -1,0 +1,8 @@
+
+[major].[minor].[bugfix]
+
+git tag -m" " v1.1.0 master
+
+1.0.0: MYOD consists of Add Expense/Income & Transaction History 
+	(filters yet to be implemented)
+1.1.0: Added About button and tranaction IDs

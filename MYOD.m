@@ -22,7 +22,7 @@ function varargout = MYOD(varargin)
 
 % Edit the above text to modify the response to help MYOD
 
-% Last Modified by GUIDE v2.5 13-Jan-2013 19:33:07
+% Last Modified by GUIDE v2.5 03-Feb-2013 19:57:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -116,6 +116,29 @@ end
 guidata(hObject, handles); % update handles
 
 
+% function: about_Callback
+% last modified: 03/02/13
+% description: Executes on button press in about
+% inputs: hObject - handle to about (see GCBO)
+%         eventdata - to be defined in a future version of MATLAB
+%         handles - structure with handles and user data (see GUIDATA)
+% NOTE: modifies handles
+function about_Callback(hObject, eventdata, handles)
+
+% check if handle to about msgbox already exists and still active
+if isfield(handles,'about_open') && ishandle(handles.about_open) 
+    figure(handles.about_open); %make it the active window
+else
+    about_msg = sprintf(['MYOD - Mind Your Own Dollars\n'...
+        'Author: Peter Aquilina\n'...
+        'Version 1.1.0\n'...
+        'Developed: Sept 2012 - Feb 2013']);
+    handles.about_open = msgbox(about_msg,'About');
+end
+
+guidata(hObject, handles); % update handles
+
+
 % function: figure1_CloseRequestFcn
 % last modified: 18/01/13
 % description: code executes when MYOD is closed
@@ -155,6 +178,9 @@ if use_git
 end
 % closes the figure
 delete(hObject);
+
+
+
 
 
 
