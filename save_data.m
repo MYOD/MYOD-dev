@@ -1,11 +1,12 @@
 % function: save_data
-% last modified: 13/01/13
+% last modified: 03/02/13
 % description: utility to save MYOD data
 % inputs: data  - data to be saved
 %         descriptor - 'inc': save income data
 %                    - 'exp': save expense data
 %                    - 'sched': save schedule data
 %                    - 'exc': save categories excluded from summarise.m
+%                    - 'id': save the next id in MYOD internals.mat
 % NOTE: Please note that save_data is not general as  behaviour is unique 
 %       to my requirements and based on windows
 % NOTE: save_data has a dependency on git being installed on the machine
@@ -65,6 +66,15 @@ switch descriptor
             r = cd(data_path);
             system(['git add exclusions.mat > ' oblivion]);
             system(['git commit -m "MYOD auto exclusions update" > ' oblivion]);            
+            cd(r);
+        end
+    case 'id'
+        next_id = data;
+        save(fullfile(data_num('path'),'internals.mat'),'next_id');
+        if use_git
+            r = cd(data_path);
+            system(['git add internals.mat > ' oblivion]);
+            system(['git commit -m "MYOD auto internals update" > ' oblivion]);
             cd(r);
         end
     otherwise

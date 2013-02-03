@@ -201,6 +201,7 @@ set(handles.table, 'Data', extract_info(handles, handles.data));
 %              Essentially the inverse of extract_info
 % inputs: handles - gui data
 %         info - display formatted cell based on MYOD data
+% NOTE: it isn't possible to get the original id, as such this will be 0
 function data = invert_info(handles, info)
 
 data = zeros(size(info,1),data_num('columns'));
@@ -808,7 +809,7 @@ function show_all_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % function: delete_Callback
-% last modified: 13/01/13
+% last modified: 03/02/13
 % description: Executes on button press in delete
 % inputs: hObject - handle to delete (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -835,7 +836,9 @@ else
     if strcmp(button,'Yes')
         bad_rows = info(ticks,:); % rows to delete (as formatted cells)
         bad_rows = invert_info(handles,bad_rows); %(as MYOD data)
-        bad_idx = ismember(handles.data, bad_rows, 'rows'); %(as logical indices)
+        t_data = handles.data; 
+        t_data(:,data_num('id')) = 0; %temp copy to null id
+        bad_idx = ismember(t_data, bad_rows, 'rows'); %(as logical indices)
         if sum(bad_idx) ~= num_selected %error check
            errordlg('Selected rows not found in data. PLEASE TELL PETER',...
                'CAUTION'); 
@@ -854,8 +857,10 @@ else
         % delete income elements
         if sum(bad_idx_inc) ~= 0% must delete income data
             income = load_data('inc');
-            bad_exp = bad_rows(bad_idx_inc,:); %income rows (as data)
-            bad_idx = ismember(income, bad_exp, 'rows');
+            t_inc = income; 
+            t_inc(:,data_num('id')) = 0; %temp copy to nullify id
+            bad_inc = bad_rows(bad_idx_inc,:); %income rows (as data)
+            bad_idx = ismember(t_inc, bad_inc, 'rows');
             if sum(bad_idx) == 0 %error check
                 errordlg(['Selected rows not found in MYOD income ' ...
                     'data. PLEASE TELL PETER'], 'CAUTION');
@@ -867,8 +872,10 @@ else
         % delete expense elements
         if sum(~bad_idx_inc) ~= 0 % must delete expense data
             expense = load_data('exp');
+            t_exp = expense; 
+            t_exp(:,data_num('id')) = 0; %temp copy to nullify id            
             bad_exp = bad_rows(~bad_idx_inc,:); %expense rows (as data)
-            bad_idx = ismember(expense, bad_exp, 'rows');
+            bad_idx = ismember(t_exp, bad_exp, 'rows');
             if sum(bad_idx) == 0 %error check
                 errordlg(['Selected rows not found in MYOD expense ' ...
                     'data. PLEASE TELL PETER'], 'CAUTION');

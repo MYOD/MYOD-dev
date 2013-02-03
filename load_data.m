@@ -1,11 +1,12 @@
 % function: load_data
-% last modified: 06/01/13
+% last modified: 03/02/13
 % description: universal load function for MYOD data. Does error checks.
 % inputs: descriptor - 'all': returns expense and income data concatenated
 %                    - 'inc': returns income data
 %                    - 'exp': returns expense data
 %                    - 'sched': returns schedule data
 %                    - 'exc': returns categories excluded from summarise.m
+%                    - 'id': returns the next unique transaction id
 % outputs: data - MYOD formatted data according to descriptor
 function data = load_data(descriptor)
 
@@ -20,6 +21,8 @@ switch descriptor
         data = load_sched();
     case 'exc'
         data = load_exc();
+    case 'id'
+        data = load_id();
 end
 
 
@@ -54,6 +57,20 @@ else
     exp = [];
 end
 
+% function load_id
+% last modified: 03/02/13
+% description: loads the next id as a double outputs 
+% outputs: id - unique int corresponding to the transaction
+function id = load_id()
+
+if exist(fullfile(data_num('path'), 'internals.mat'),'file')
+    load(fullfile(data_num('path'), 'internals.mat'));
+    id = next_id;
+else
+    errordlg('MYOD system data not found! Let Peter Know!!', ...
+        'MYOD System Data Missing');
+    id = 0;
+end
 
 
 % function load_inc

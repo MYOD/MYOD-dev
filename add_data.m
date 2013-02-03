@@ -208,7 +208,7 @@ end
 
 
 % function: done_Callback
-% last modified: 13/01/13
+% last modified: 03/02/13
 % description: Executes on button press in done
 % inputs: hObject - handle to done (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -253,6 +253,11 @@ sub_cat_list = get(handles.sub_cat,'string');
 i = get(handles.sub_cat, 'value');
 sub_str = sub_cat_list{i}; %selected sub_cat as String
 newEntry(data_num('sub_cat')) = get_sub_cat('index',main_str,sub_str); %sub_cat as index
+
+% add transaction ID
+id = load_data('id');
+save_data(id+1,'id'); %update id
+newEntry(data_num('id')) = id;
 
 if get(handles.scheduled,'value') %scheduled payment was ticked
     contents = get(handles.freq,'String');
@@ -329,38 +334,40 @@ end
 if ~void && newEntry(data_num('amount')) > 0 %save expense
 
     expense = load_data('exp');
-    % check if it already exists
-    existing_row = ismember(expense,newEntry,'rows');
-    if existing_row %user entered same transaction
-        user = questdlg(['Transaction has previously been entered into '...
-            'MYOD. If you unintentionally entered the data twice hit '...
-            'cancel, otherwise hit confirm and the amount will be '...
-            'added to the existing entry.'],...
-            'Duplicate Entry Detected','Confirm','Cancel','Cancel');
-        
-        if strcmp(user,'Confirm') % add to existing entry
+    if expense % there is existing expense data
+        t_expense = expense; 
+        t_new = newEntry; % temp variables: null fields not interested in
+        t_expense(:,data_num('id')) = 0;
+        t_new(data_num('id')) = 0;        
+    
+        % check if transaction already exists
+        existing_row = ismember(t_expense,t_new,'rows');
+        if existing_row %user entered same transaction
+            user = questdlg(['Transaction has previously been entered into '...
+                'MYOD. If you unintentionally entered the data twice hit '...
+                'cancel, otherwise hit confirm and the amount will be '...
+                'added to the existing entry.'],...
+                'Duplicate Entry Detected','Confirm','Cancel','Cancel');
+            
+            if strcmp(user,'Confirm') % add to existing entry
                 expense(existing_row,data_num('amount')) = ...
                     expense(existing_row,data_num('amount')) + ...
                     newEntry(data_num('amount'));
-        end
-    else
-        % check if all fields besides amount match an exisiting entry
-        if size(expense,1) > 0 %expense must exist
-            t_expense = expense;
+            end
+        else %not duplicate entry but check if only amount changed
             t_expense(:,data_num('amount')) = 0;
-            t_new = newEntry;
             t_new(data_num('amount')) = 0;
             existing_row = ismember(t_expense,t_new,'rows');
-        else
-            existing_row = 0;
+            if existing_row %add amount to existing entry
+                expense(existing_row,data_num('amount')) = ...
+                    expense(existing_row,data_num('amount')) + ...
+                    newEntry(data_num('amount'));
+            else % unique entry simple add to existing
+                expense = reverse_sort(expense,newEntry); %add newentry
+            end
         end
-        if existing_row %add amount to existing entry
-            expense(existing_row,data_num('amount')) = ...
-                expense(existing_row,data_num('amount')) + ...
-                newEntry(data_num('amount'));
-        else % unique entry simple add to existing
-            expense = reverse_sort(expense,newEntry); %add newentry
-        end
+    else % newEntry is the very first expense to be recorded
+        expense = newEntry;
     end
             
     save_data(expense,'exp');
@@ -371,40 +378,42 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
 elseif ~void && newEntry(data_num('amount')) < 0 % save income
     
     income = load_data('inc');
-    % check if it already exists
-    existing_row = ismember(income,newEntry,'rows');
-    if existing_row %user entered same transaction
-        user = questdlg(['Transaction has previously been entered into '...
-            'MYOD. If you unintentionally entered the data twice hit '...
-            'cancel, otherwise hit confirm and the amount will be '...
-            'added to the existing entry.'],...
-            'Duplicate Entry Detected','Confirm','Cancel','Cancel');
+    if income % there is existing income data
+        t_income = income;
+        t_new = newEntry; % temp variables: null fields not interested in
+        t_income(:,data_num('id')) = 0;
+        t_new(data_num('id')) = 0;
         
-        if strcmp(user,'Confirm') % add to existing entry
-            income(existing_row,data_num('amount')) = ...
-                income(existing_row,data_num('amount')) + ...
-                newEntry(data_num('amount'));
-        end
-    else % unique entry simple add to existing
-        % check if all fields besides amount match an exisiting entry
-        if size(income,1) > 0 %income must exist
-            t_income = income;
+        % check if transaction already exists
+        existing_row = ismember(t_income,t_new,'rows');
+        if existing_row %user entered same transaction
+            user = questdlg(['Transaction has previously been entered into '...
+                'MYOD. If you unintentionally entered the data twice hit '...
+                'cancel, otherwise hit confirm and the amount will be '...
+                'added to the existing entry.'],...
+                'Duplicate Entry Detected','Confirm','Cancel','Cancel');
+            
+            if strcmp(user,'Confirm') % add to existing entry
+                income(existing_row,data_num('amount')) = ...
+                    income(existing_row,data_num('amount')) + ...
+                    newEntry(data_num('amount'));
+            end
+        else %not duplicate entry but check if only amount changed
             t_income(:,data_num('amount')) = 0;
-            t_new = newEntry;
             t_new(data_num('amount')) = 0;
             existing_row = ismember(t_income,t_new,'rows');
-        else
-            existing_row = 0;
+            if existing_row %add amount to existing entry
+                income(existing_row,data_num('amount')) = ...
+                    income(existing_row,data_num('amount')) + ...
+                    newEntry(data_num('amount'));
+            else % unique entry simple add to existing
+                income = reverse_sort(income,newEntry); %add newentry
+            end
         end
-        if existing_row %add amount to existing entry
-            income(existing_row,data_num('amount')) = ...
-                income(existing_row,data_num('amount')) + ...
-                newEntry(data_num('amount'));
-        else % unique entry simple add to existing 
-            income = reverse_sort(income,newEntry); %add NewEntry
-        end
+    else % newEntry is the very first income to be recorded
+        income = newEntry;
     end
-
+    
     save_data(income,'inc');
     main_handles = guidata(handles.main_hObject);
     summarise(main_handles);
