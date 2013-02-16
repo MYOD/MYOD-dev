@@ -208,7 +208,7 @@ end
 
 
 % function: done_Callback
-% last modified: 03/02/13
+% last modified: 16/02/13
 % description: Executes on button press in done
 % inputs: hObject - handle to done (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -342,7 +342,7 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
     
         % check if transaction already exists
         existing_row = ismember(t_expense,t_new,'rows');
-        if existing_row %user entered same transaction
+        if sum(existing_row) %user entered same transaction
             user = questdlg(['Transaction has previously been entered into '...
                 'MYOD. If you unintentionally entered the data twice hit '...
                 'cancel, otherwise hit confirm and the amount will be '...
@@ -358,7 +358,7 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
             t_expense(:,data_num('amount')) = 0;
             t_new(data_num('amount')) = 0;
             existing_row = ismember(t_expense,t_new,'rows');
-            if existing_row %add amount to existing entry
+            if sum(existing_row) %add amount to existing entry
                 expense(existing_row,data_num('amount')) = ...
                     expense(existing_row,data_num('amount')) + ...
                     newEntry(data_num('amount'));
@@ -386,7 +386,7 @@ elseif ~void && newEntry(data_num('amount')) < 0 % save income
         
         % check if transaction already exists
         existing_row = ismember(t_income,t_new,'rows');
-        if existing_row %user entered same transaction
+        if sum(existing_row) %user entered same transaction
             user = questdlg(['Transaction has previously been entered into '...
                 'MYOD. If you unintentionally entered the data twice hit '...
                 'cancel, otherwise hit confirm and the amount will be '...
@@ -402,7 +402,7 @@ elseif ~void && newEntry(data_num('amount')) < 0 % save income
             t_income(:,data_num('amount')) = 0;
             t_new(data_num('amount')) = 0;
             existing_row = ismember(t_income,t_new,'rows');
-            if existing_row %add amount to existing entry
+            if sum(existing_row) %add amount to existing entry
                 income(existing_row,data_num('amount')) = ...
                     income(existing_row,data_num('amount')) + ...
                     newEntry(data_num('amount'));

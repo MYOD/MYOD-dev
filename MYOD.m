@@ -117,7 +117,7 @@ guidata(hObject, handles); % update handles
 
 
 % function: about_Callback
-% last modified: 03/02/13
+% last modified: 16/02/13
 % description: Executes on button press in about
 % inputs: hObject - handle to about (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -131,7 +131,7 @@ if isfield(handles,'about_open') && ishandle(handles.about_open)
 else
     about_msg = sprintf(['MYOD - Mind Your Own Dollars\n'...
         'Author: Peter Aquilina\n'...
-        'Version 1.1.0\n'...
+        'Version 1.1.1\n'...
         'Developed: Sept 2012 - Feb 2013']);
     handles.about_open = msgbox(about_msg,'About');
 end

@@ -2,13 +2,6 @@ URGENT
 -------------------------------------------------------------------
 
 scheduled has wrong health insurance data
-add transaction number column to MYOD data (and manually add to previous data)
-	this offers future potential
-	now every transaction has a reference number
-	could make separate struct to have comments with certain transactions, etc.
-	- already changed data_num
-	- working on add_data (changes also required to reschedule, save_data, load_data)
-	- manually added internals.mat to MYOD_data
 
 SOON
 ---------------------------------------------------------------------
@@ -32,14 +25,6 @@ Look into add_data's reverse_sort.
 	Does reschedule violate the order assumption
 Implement save_data and change all instances of existing codes use of save
 Add optional end dates to scheduled payments
-Implement About MYOD button
-	- msgbox with:
-		MYOD - Mind Your Own Dollars
-		Version 1.1.1
-		Developed Sept 2012 - Feb 2013
-		Author: Peter Aquilina
-	- From this point forward should use git tags for versions
-	- also maintain a history text file: just a line per version
 		
 
 LATER

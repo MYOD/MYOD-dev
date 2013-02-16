@@ -5,4 +5,6 @@ git tag -m" " v1.1.0 master
 
 1.0.0: MYOD consists of Add Expense/Income & Transaction History 
 	(filters yet to be implemented)
+
 1.1.0: Added About button and tranaction IDs
+1.1.1: Fixed bug which was allowing duplicate transactions to be recorded/not adding amounts when all else equal.

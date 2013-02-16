@@ -66,7 +66,8 @@ big_list{5} = ...%main 5, Accomodation
     'Kitchenware',... %sub 4
     'Bedding',... %sub 5
     'Others',...%sub 6
-    'Laundry/Bathroom'...%sub 7
+    'Laundry/Bathroom',...%sub 7
+    'Garden/Backyard'...sub 8
     }; %sub 6
 big_list{6} = ...%main 6, Bills
     {'Electricity',...%sub 1

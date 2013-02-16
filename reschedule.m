@@ -1,5 +1,5 @@
 % function: reschedule
-% last modified: 03/02/13
+% last modified: 16/02/13
 % description: It goes through entries in scheduled.mat. Check if they have
 %              payments, not yet effected, in the past. If so, executes
 %              those updating income.mat, expense.mat as necessary.
@@ -57,7 +57,8 @@ for i = 1:size(scheduled,1)
         else
             existing_row = 0;
         end
-        if existing_row %add amount to existing entry
+        if sum(existing_row) %add amount to existing entry
+            corr_row(corr_row==0) = []; %remove useless elements
             expense(existing_row,data_num('amount')) = ...
                 expense(existing_row,data_num('amount')) + ...
                 cashflow(corr_row,data_num('amount'));
@@ -81,7 +82,8 @@ for i = 1:size(scheduled,1)
         else
             existing_row = false;
         end
-        if existing_row %add amount to existing entry
+        if sum(existing_row) %add amount to existing entry
+            corr_row(corr_row==0) = []; %remove useless elements
             income(existing_row,data_num('amount')) = ...
                 income(existing_row,data_num('amount')) + ...
                 cashflow(corr_row,data_num('amount'));
