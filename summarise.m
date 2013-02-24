@@ -1,12 +1,12 @@
 % function: summarise
-% last modified: 18/01/13
+% last modified: 24/02/13
 % description: refreshes the text display on MYOD
 % inputs: handles - MYOD gui data
 function summarise(handles)
 
 
 % MYOD formatted data
-cashflow = load_data('all'); 
+cashflow = [load_data('exp'); load_data('inc')]; 
 exclusions = load_data('exc'); %categories to ignore
 
 if size(cashflow,1) ~= 0 %do have cashflow data 

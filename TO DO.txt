@@ -2,6 +2,10 @@ URGENT
 -------------------------------------------------------------------
 
 scheduled has wrong health insurance data
+modify expense summary calculations to include all incomes except salary
+	- implement code in an if statement so that I can turn this off if need be
+	- potentially may like to make the on/off boolean a MYOD setting
+
 
 SOON
 ---------------------------------------------------------------------
@@ -44,7 +48,8 @@ Do a "where's my money going" gui
 Make a scheduled payments gui - to view and delete scheduled payments
 R2012a MATLAB help warns behaviour of ismember will change look into effect for me
 make save_data general for all computers including the optional use of automating git.
-
+add button to trans_hist to export listing in readable format to an excel spreadsheet.
+make sure MYOD won't crash if computer doesn't have git installed
 
 ONE DAY
 ---------------------------------------------------------------------

@@ -1,160 +1,67 @@
 % function: load_data
-% last modified: 03/02/13
+% last modified: 24/02/13
 % description: universal load function for MYOD data. Does error checks.
-% inputs: descriptor - 'all': returns expense and income data concatenated
-%                    - 'inc': returns income data
+% inputs: descriptor - 'inc': returns income data
 %                    - 'exp': returns expense data
 %                    - 'sched': returns schedule data
 %                    - 'exc': returns categories excluded from summarise.m
 %                    - 'id': returns the next unique transaction id
+%                    - 'true_inc': returns the true income categories excluded
+%                      from summarise.m
 % outputs: data - MYOD formatted data according to descriptor
 function data = load_data(descriptor)
 
+logic_error = false; %precaution in case of invalid parameter
+
+% decode input parameter
 switch descriptor
-    case 'all'
-        data = load_all();
     case 'inc'
-        data = load_inc();
+        data_var = 'income';
+        data_file = 'income.mat';                
     case 'exp'
-        data = load_exp();
+        data_var = 'expense';
+        data_file = 'expense.mat';                
     case 'sched'
-        data = load_sched();
+        data_var = 'scheduled';
+        data_file = 'scheduled.mat';                
     case 'exc'
-        data = load_exc();
+        data_var = 'exclusions';
+        data_file = 'internals.mat';                
     case 'id'
-        data = load_id();
+        data_var = 'next_id';
+        data_file = 'internals.mat';                
+        % potentially may wish to check for existence of data
+        % if non-existent may wish to flag error
+    case 'true_inc'
+        data_var = 'true_inc';
+        data_file = 'internals.mat';                        
+    otherwise
+        logic_error = true;
+        errordlg('Invalid Load Descriptor. PLEASE TELL PETER');
 end
 
-
-
-% function: load_all
-% last modified: 20/10/12
-% description: loads expense data and income data and concatenates the two
-%              a warning will be issued if no prior data for either
-% outputs: data
-function data = load_all()
-
-exp = load_exp();
-inc = load_inc();
-
-data = [exp; inc];
-
-
-
-% function load_exp
-% last modified: 20/11/12
-% description: loads the expense data, returns it as a matrix, plus does a
-%              little error checking. If no data exists, a empty matrix is
-%              returned, and a warning dialog will be displayed.
-% outputs: exp - expense matrix
-function exp = load_exp()
-
-if exist(fullfile(data_num('path'), 'expense.mat'),'file')
-    load(fullfile(data_num('path'), 'expense.mat'));
-    exp = expense;
+% load requested data
+if ~logic_error    
+    if exist(fullfile(data_num('path'), data_file),'file')
+        load(fullfile(data_num('path'), data_file));
+        if exist(data_var,'var')
+            eval(['data = ' data_var ';']);
+        else
+            warndlg(['The variable ' data_var ' does not exist'],...
+            ['Variable ' upper(data_var(1)) data_var(2:end) ...
+            ' Does Not Exist']);
+            data = [];
+        end
+    else
+        warndlg(['File: ' fullfile(data_num('path'), data_file) ...
+            ' was not found. This is needed for the ' data_var ...
+            ' data.'],...
+            ['No ' upper(data_var(1)) data_var(2:end) ' Data']);
+        data = [];
+    end
 else
-    warndlg('No expense data was found', 'No Expense Records');
-    exp = [];
+    data = [];
 end
-
-% function load_id
-% last modified: 03/02/13
-% description: loads the next id as a double outputs 
-% outputs: id - unique int corresponding to the transaction
-function id = load_id()
-
-if exist(fullfile(data_num('path'), 'internals.mat'),'file')
-    load(fullfile(data_num('path'), 'internals.mat'));
-    id = next_id;
-else
-    errordlg('MYOD system data not found! Let Peter Know!!', ...
-        'MYOD System Data Missing');
-    id = 0;
-end
-
-
-% function load_inc
-% last modified: 20/11/12
-% description: loads the income data, returns it as a matrix, plus does a
-%              little error checking. If no data exists, a empty matrix is
-%              returned, and a warning dialog will be displayed.
-% outputs: inc - income matrix
-function inc = load_inc()
-
-if exist(fullfile(data_num('path'), 'income.mat'),'file')
-    load(fullfile(data_num('path'), 'income.mat'));
-    inc = income;
-else
-    warndlg('No income data was found', 'No Income Records');
-    inc = [];
-end
-
-
-% function load_sched
-% last modified: 20/11/12
-% description: loads the schedule data, returns it as a matrix, plus does a
-%              little error checking. If no data exists, a empty matrix is
-%              returned, and a warning dialog will be displayed.
-% outputs: sched - income matrix
-function sched = load_sched()
-
-if exist(fullfile(data_num('path'), 'scheduled.mat'),'file')
-    load(fullfile(data_num('path'), 'scheduled.mat'));
-    sched = scheduled;
-else
-    warndlg('No scheduled data was found', 'No Scheduled Records');
-    sched = [];
-end
-
-
-% function load_exc
-% last modified: 06/01/13
-% description: loads the exclusions data, returns it as a 2 column matrix,
-%              plus does a little error checking. These are the categories
-%              that do not contribute to expenses average
-%              If no data exists, a empty matrix is
-%              returned, and a warning dialog will be displayed.
-% outputs: exc - income matrix
-function exc = load_exc()
-
-if exist(fullfile(data_num('path'), 'exclusions.mat'),'file')
-    load(fullfile(data_num('path'), 'exclusions.mat'));
-    exc = exclusions;
-else
-    warndlg('No exclusions data was found', 'No Exclusions Records');
-    exc = [];
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

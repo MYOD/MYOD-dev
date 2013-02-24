@@ -1,10 +1,13 @@
 
-[major].[minor].[bugfix]
+[major].[minor].[bugfix/trivial improvement]
 
-git tag -m" " v1.1.0 master
 
 1.0.0: MYOD consists of Add Expense/Income & Transaction History 
 	(filters yet to be implemented)
 
 1.1.0: Added About button and tranaction IDs
 1.1.1: Fixed bug which was allowing duplicate transactions to be recorded/not adding amounts when all else equal.
+1.1.2: 25/02/13: Improved save_data & load_data to be more consistent, better code reuse,
+		 and more adaptible for future; paved way for 1.1.3 
+1.1.3: to be done: summary expenses now treats income from all categories as -ve expenses
+                 except for those specified in MYOD_data

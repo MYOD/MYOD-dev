@@ -44,7 +44,7 @@ end
 % End initialization code - DO NOT EDIT
 
 % function: trans_hist_OpeningFcn
-% last modified: 06/01/13
+% last modified: 24/02/13
 % description: Executes just before trans_hist is made visible
 % inputs: hObject - handle to figure
 %         eventdata - to be defined in a future version of MATLAB
@@ -87,7 +87,7 @@ handles.table = uitable('Parent', handles.figure1, 'Position', ...
 initialise_table(handles); %display table
 
 % prepare the data
-handles.data = load_data('all');
+handles.data = [load_data('exp'); load_data('inc')];
 if size(handles.data,1) > 0
     sort_data(hObject, handles); %sort it
     handles = guidata(hObject); %reload updated handles
