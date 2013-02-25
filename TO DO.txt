@@ -10,7 +10,9 @@ modify expense summary calculations to include all incomes except salary
 SOON
 ---------------------------------------------------------------------
 
-
+add encryption to MYOD code and data before uploading to git 
+	- make MATLAB wrappers for this to simplify the process
+	- have a MATLAB wrapper for downloading/decrypting 
 implement scheduled payments
 	do a view/edit/delete scheduled payments gui
 	add internet payments
@@ -77,5 +79,5 @@ add settings button to MYOD - affects internals.mat variables
 		            - option to upload data to a git account
 			    - provide details like git address
 		            - location to put MYOD data	
-
-
+when trans_hist has no cashflow data the table should have a row saying no cashflow data 
+	to display
