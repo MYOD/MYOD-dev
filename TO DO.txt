@@ -31,11 +31,16 @@ Look into add_data's reverse_sort.
 	Does reschedule violate the order assumption
 Implement save_data and change all instances of existing codes use of save
 Add optional end dates to scheduled payments
-		
+Known bug - didn't delete a entry (that was double scheduled) the amount was 493.43. Invert_info
+	    correctly getting right amount, the data in matrix is off by an infinitesimal amount
+spending gui maybe should exclude future info?	
+cur2str (used in spending and others) doesn't show leading 0 for cents	
 
 LATER
 ---------------------------------------------------------------------
 
+Improve sorting in trans_hist (e.g. if sort by category, should  be sorted by date within 
+         each category)
 Improve get_ functions significantly to make MYOD's base more flexible and reliable
  - consider making categories data that is loaded instead of hardcoded.
  - implemented as a numeric lookup table
@@ -81,3 +86,10 @@ add settings button to MYOD - affects internals.mat variables
 		            - location to put MYOD data	
 when trans_hist has no cashflow data the table should have a row saying no cashflow data 
 	to display
+automatically git pull MYOD_data upon opening to support MYOD working on same data across
+	different machines. May also be wise to pull before saving to avoid conflicts. 
+	Can make this a MYOD setting "Will two users likely share MYOD data around the same
+	time?" if no, may save a bit of processing time. Can also have a option for sharing
+	data at all (need for initial pull).
+
+

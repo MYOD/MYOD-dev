@@ -27,6 +27,7 @@ list = {'Cash',... %1
     'Couples',...%3
     'Ubank - Investments',...%4
     'Ubank - Others',...%5
+    'Credit Card'...%6
     };
 
 switch control

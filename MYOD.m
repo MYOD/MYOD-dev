@@ -22,7 +22,7 @@ function varargout = MYOD(varargin)
 
 % Edit the above text to modify the response to help MYOD
 
-% Last Modified by GUIDE v2.5 03-Feb-2013 19:57:23
+% Last Modified by GUIDE v2.5 17-Aug-2013 19:21:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,6 +61,9 @@ reschedule();
 % display summary
 summarise(handles);
 
+% include wedding summary
+wedding(handles);
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -77,6 +80,28 @@ function varargout = MYOD_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+% function: wedding
+% last modified: 11/06/13
+% description: shows the number of days since a last major argument
+%              and the % to making a wedding date
+% inputs: handles - structure with handles and user data (see GUIDATA)
+function wedding(handles)
+
+first_gday = '11/08/13'; %first argument free dd/mm/yy 
+target_days = 14; %number of days to reach to wed
+
+%convert date to number
+n_gday = datenum(first_gday,'dd/mm/yy'); % first day as a number
+n_today = datenum(date); %todays date as a number
+days = n_today - n_gday + 1; %number of days argument free!
+
+txt = sprintf(['No bad argument for %d days.\n'...
+    'You are %.1f%% of the way to a beautiful shiny necklace!!\n'...
+    'Never Give Up!!'],days,days/target_days*100);
+
+set(handles.wedding_msg,'String',txt);
+
 
 % function: add_entry_Callback
 % last modified: 20/10/12
@@ -131,8 +156,8 @@ if isfield(handles,'about_open') && ishandle(handles.about_open)
 else
     about_msg = sprintf(['MYOD - Mind Your Own Dollars\n'...
         'Author: Peter Aquilina\n'...
-        'Version 1.1.3\n'...
-        'Developed: Sept 2012 - Feb 2013']);
+        'Version 1.2.0\n'...
+        'Developed: Sept 2012 - Aug 2013']);
     handles.about_open = msgbox(about_msg,'About');
 end
 
@@ -179,6 +204,28 @@ end
 % closes the figure
 delete(hObject);
 
+
+
+% function: speding_Callback
+% last modified: 17/08/13
+% description: Executes on button press in spending
+% inputs: hObject - handle to about (see GCBO)
+%         eventdata - to be defined in a future version of MATLAB
+%         handles - structure with handles and user data (see GUIDATA)
+% NOTE: modifies handles
+function spending_Callback(hObject, eventdata, handles)
+% hObject    handle to spending (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% check if handle to speding already exists and still active
+if isfield(handles,'spending_open') && ishandle(handles.spending_open) 
+    figure(handles.spending_open); %make it the active window
+else
+    handles.spending_open = spending;
+end
+
+guidata(hObject, handles); % update handles
 
 
 

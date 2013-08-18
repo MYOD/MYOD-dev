@@ -11,3 +11,4 @@
 		 and more adaptible for future; paved way for 1.1.3 
 1.1.3: 25/02/13: summary expenses now treats income from all categories as -ve expenses
                  except for those specified in MYOD_data
+1.2.0: 18/08/13: Adding spending GUI - allows you to quantify spending by category

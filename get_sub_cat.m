@@ -48,7 +48,8 @@ big_list{2} = ...%main 2, Dining
     'Snacks',...%sub 3
     'Drinks',...%sub 4
     'Others',...%sub 5
-    'Coffee/Cake'...%sub 6
+    'Coffee/Cake',...%sub 6
+    'Cafeteria/Deli'...%sub 7
     };
 big_list{3} = ...%main 3, Entertainment
     {'Cinema',...%sub 1
@@ -67,8 +68,9 @@ big_list{5} = ...%main 5, Accomodation
     'Bedding',... %sub 5
     'Others',...%sub 6
     'Laundry/Bathroom',...%sub 7
-    'Garden/Backyard'...sub 8
-    }; %sub 6
+    'Garden/Backyard',...sub 8
+    'Cat'...%sub 9
+    }; 
 big_list{6} = ...%main 6, Bills
     {'Electricity',...%sub 1
     'Water',...%sub 2
@@ -86,7 +88,8 @@ big_list{8} = ...%main 8, Vehicle
     'Parking',...%sub 5
     'Petrol',...%sub 6
     'Service',...%sub 7
-    'Tyres'...sub 8
+    'Tyres',...sub 8
+    'Registration'...%sub 9
     };
 big_list{9} = ...%main 9, Presents
     {'Peter',...%sub 1
@@ -106,12 +109,21 @@ big_list{11} = ...%main 11, Others
     'Tax Return',...% sub 3
     'Health Insurance',...%sub 4
     'Carrie''s Medical',... %sub 5
-    'Peter''s Medical'... %sub 6
+    'Peter''s Medical',... %sub 6
+    'Flybuys/Credit Card'...%sub 7
     };
 big_list{12} = ...%main 12, Investments
     {'Education',...%sub 1
     'Others',...% sub 2
-    'Networking'...% sub 3
+    'Networking',...% sub 3
+    'Office',...%sub 4
+    'Tools',...%sub 5
+    'Travel',... %sub 6
+    'Accountant',...%sub 7
+    'Lawyer'...%sub 8
+    };
+big_list{13} = ... %main 13, Family
+    {'Ring'... %sub 1
     };
 
 

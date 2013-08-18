@@ -33,7 +33,8 @@ list = {'Shopping',... %1
     'Presents',... %9
     'Job',...%10
     'Others',...%11
-    'Investments'...%12
+    'Investments',...%12
+    'Family'...%13
     };
 
 switch control
