@@ -193,6 +193,16 @@ switch origin_str
         days_past = datenum(date) - first_day + 1;
         valid_rows = cf_cats(:,data_num('date')) >= first_day;
         cf_cats = cf_cats(valid_rows,:);
+    case 'Last 6 Months'
+        first_day = addtodate(datenum(date), -6, 'month') + 1;
+        days_past = datenum(date) - first_day + 1;
+        valid_rows = cf_cats(:,data_num('date')) >= first_day;
+        cf_cats = cf_cats(valid_rows,:);
+    case 'Last 9 Months'
+        first_day = addtodate(datenum(date), -9, 'month') + 1;
+        days_past = datenum(date) - first_day + 1;
+        valid_rows = cf_cats(:,data_num('date')) >= first_day;
+        cf_cats = cf_cats(valid_rows,:);        
     case 'Last Year'
         first_day = addtodate(datenum(date), -1, 'year') + 1;
         days_past = datenum(date) - first_day + 1;

@@ -89,7 +89,6 @@ varargout{1} = handles.output;
 function wedding(handles)
 
 first_gday = '11/08/13'; %first argument free dd/mm/yy 
-target_days = 14; %number of days to reach to wed
 
 %convert date to number
 n_gday = datenum(first_gday,'dd/mm/yy'); % first day as a number
@@ -97,8 +96,7 @@ n_today = datenum(date); %todays date as a number
 days = n_today - n_gday + 1; %number of days argument free!
 
 txt = sprintf(['No bad argument for %d days.\n'...
-    'You are %.1f%% of the way to a beautiful shiny necklace!!\n'...
-    'Never Give Up!!'],days,days/target_days*100);
+    'Never Give Up!!'],days);
 
 set(handles.wedding_msg,'String',txt);
 
