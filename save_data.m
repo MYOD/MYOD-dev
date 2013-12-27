@@ -56,7 +56,10 @@ switch descriptor
         % if non-existent may wish to flag error
     case 'true_inc'
         data_var = 'true_inc';
-        data_file = 'internals.mat';                        
+        data_file = 'internals.mat';  
+    case 'last_arg'
+        data_var = 'last_arg'; %date of last argument
+        data_file = 'internals.mat';
     otherwise
         logic_error = true;
         errordlg('Invalid Save Descriptor. PLEASE TELL PETER');

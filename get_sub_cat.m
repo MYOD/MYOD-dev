@@ -54,7 +54,8 @@ big_list{2} = ...%main 2, Dining
 big_list{3} = ...%main 3, Entertainment
     {'Cinema',...%sub 1
     'Others',... %sub 2
-    'Exercise'...%sub 3
+    'Exercise',...%sub 3
+    'Soccer'... %sub 4
     };
 big_list{4} = ...%main 4, Holidays 
     {'Local',...%sub 1
@@ -89,7 +90,8 @@ big_list{8} = ...%main 8, Vehicle
     'Petrol',...%sub 6
     'Service',...%sub 7
     'Tyres',...sub 8
-    'Registration'...%sub 9
+    'Registration',...%sub 9
+    'Driving License'...%sub 10
     };
 big_list{9} = ...%main 9, Presents
     {'Peter',...%sub 1
@@ -117,10 +119,11 @@ big_list{12} = ...%main 12, Investments
     'Others',...% sub 2
     'Networking',...% sub 3
     'Office',...%sub 4
-    'Tools',...%sub 5
+    'Reno Tools',...%sub 5
     'Travel',... %sub 6
     'Accountant',...%sub 7
-    'Lawyer'...%sub 8
+    'Lawyer',...%sub 8
+    'Research Tools'...%sub 9
     };
 big_list{13} = ... %main 13, Family
     {'Ring'... %sub 1

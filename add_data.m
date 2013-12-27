@@ -22,7 +22,7 @@ function varargout = add_data(varargin)
 
 % Edit the above text to modify the response to help add_data
 
-% Last Modified by GUIDE v2.5 08-Jan-2013 22:36:06
+% Last Modified by GUIDE v2.5 03-Nov-2013 19:14:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -208,7 +208,7 @@ end
 
 
 % function: done_Callback
-% last modified: 16/02/13
+% last modified: 03/11/13
 % description: Executes on button press in done
 % inputs: hObject - handle to done (see GCBO)
 %         eventdata - to be defined in a future version of MATLAB
@@ -226,9 +226,15 @@ catch
     void = true;
 end
 
+% extract user's amount
 a = get(handles.amount,'string');
 a = str2double(a);  
-newEntry(data_num('amount')) = round(a*100)/100; %amount; only retain 2 decimals
+if get(handles.cashback,'Value') && strcmp(get(handles.cashback,'Visible'),'on')
+    % apply 2% discount
+    newEntry(data_num('amount')) = round(a*98)/100; %amount; only retain 2 decimals
+else
+    newEntry(data_num('amount')) = round(a*100)/100; %amount; only retain 2 decimals
+end
 if isnan(newEntry(data_num('amount'))) %user didn't enter a proper number
     errordlg('Amount entered needs to be a valid number!',...
         'Amount Must Be A Number');
@@ -457,14 +463,29 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in fund.
+% function: fund_Callback
+% last modified: 3/11/13
+% description: Executes on selection change in fund
+% inputs: hObject - handle to fund (see GCBO)
+%         eventdata - to be defined in a future version of MATLAB
+%         handles - structure with handles and user data (see GUIDATA)
 function fund_Callback(hObject, eventdata, handles)
-% hObject    handle to fund (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
+% 
 % Hints: contents = get(hObject,'String') returns fund contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from fund
+
+contents = get(handles.fund,'String');
+curr_fund = contents{get(handles.fund,'Value')};
+if strcmp(curr_fund,'Couples')
+    set(handles.cashback,'Visible','On');
+    set(handles.cashback,'Value',1);
+else
+    set(handles.cashback,'Visible','Off');
+end
+
+
+
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -547,3 +568,12 @@ function custom_list_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in cashback.
+function cashback_Callback(hObject, eventdata, handles)
+% hObject    handle to cashback (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of cashback

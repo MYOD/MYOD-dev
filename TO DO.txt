@@ -18,13 +18,6 @@ implement scheduled payments
 	add internet payments
 finish implementation of trans_hist
 	implement filters
-implement GUIs for recording and displaying description of loans
-	and then put $1100 against John. 15/10/12. Ubank - Others.
-	John, Tom owe another $70 for xbox, ING Direct
-		- John returned $300 29/10/12 Cash
-		                $200 5/9/12
-				$200 12/11/12
-		- John returned $470 31/12/12
 Look into add_data's reverse_sort.
 	Is there any point to it?
 	Does trans_hist violate the order assumption once a item is deleted
@@ -57,6 +50,7 @@ R2012a MATLAB help warns behaviour of ismember will change look into effect for 
 make save_data general for all computers including the optional use of automating git.
 add button to trans_hist to export listing in readable format to an excel spreadsheet.
 make sure MYOD won't crash if computer doesn't have git installed
+Can add keyboard shortcuts by "Accelerator" object property
 
 ONE DAY
 ---------------------------------------------------------------------

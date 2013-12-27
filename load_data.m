@@ -1,5 +1,5 @@
 % function: load_data
-% last modified: 24/02/13
+% last modified: 27/12/13
 % description: universal load function for MYOD data. Does error checks.
 % inputs: descriptor - 'inc': returns income data
 %                    - 'exp': returns expense data
@@ -34,7 +34,10 @@ switch descriptor
         % if non-existent may wish to flag error
     case 'true_inc'
         data_var = 'true_inc';
-        data_file = 'internals.mat';                        
+        data_file = 'internals.mat';
+    case 'last_arg'
+        data_var = 'last_arg'; %date of last argument
+        data_file = 'internals.mat';
     otherwise
         logic_error = true;
         errordlg('Invalid Load Descriptor. PLEASE TELL PETER');

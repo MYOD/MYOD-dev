@@ -22,7 +22,7 @@ function varargout = MYOD(varargin)
 
 % Edit the above text to modify the response to help MYOD
 
-% Last Modified by GUIDE v2.5 17-Aug-2013 19:21:13
+% Last Modified by GUIDE v2.5 27-Dec-2013 22:52:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,23 +82,28 @@ function varargout = MYOD_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 % function: wedding
-% last modified: 11/06/13
+% last modified: 27/12/13
 % description: shows the number of days since a last major argument
 %              and the % to making a wedding date
 % inputs: handles - structure with handles and user data (see GUIDATA)
 function wedding(handles)
 
-first_gday = '11/08/13'; %first argument free dd/mm/yy 
+last_arg = load_data('last_arg'); %first argument free dd/mm/yy 
 
+if size(last_arg,1) == 0 %no last_arg available
+    last_arg = datestr(today,'dd/mm/yy');
+    warndlg('no argument date found', 'No argument data');
+end
 %convert date to number
-n_gday = datenum(first_gday,'dd/mm/yy'); % first day as a number
+n_gday = datenum(last_arg,'dd/mm/yy'); % first day as a number
 n_today = datenum(date); %todays date as a number
-days = n_today - n_gday + 1; %number of days argument free!
+days = n_today - n_gday; %number of days argument free!
 
 txt = sprintf(['No bad argument for %d days.\n'...
     'Never Give Up!!'],days);
 
 set(handles.wedding_msg,'String',txt);
+
 
 
 % function: add_entry_Callback
@@ -227,19 +232,14 @@ guidata(hObject, handles); % update handles
 
 
 
+% function: reset_Callback
+% last modified: 27/12/13
+% description: updates the date of last argument to be today
+% inputs: hObject - handle to reset (see GCBO)
+%         eventdata - to be defined in a future version of MATLAB
+%         handles - structure with handles and user data (see GUIDATA)
+function reset_Callback(hObject, eventdata, handles)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+save_data(datestr(today,'dd/mm/yy'),'last_arg'); %today is most recent argument
+wedding(handles); %reset display
 
