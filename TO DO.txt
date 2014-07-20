@@ -1,11 +1,12 @@
 URGENT
 -------------------------------------------------------------------
 
+
 scheduled has wrong health insurance data
 modify expense summary calculations to include all incomes except salary
 	- implement code in an if statement so that I can turn this off if need be
 	- potentially may like to make the on/off boolean a MYOD setting
-
+* reduce frequency of commits (remove it from save_data.m, bring into MYOD closeRequestFcn).
 
 SOON
 ---------------------------------------------------------------------
@@ -32,6 +33,8 @@ cur2str (used in spending and others) doesn't show leading 0 for cents
 LATER
 ---------------------------------------------------------------------
 
+Add tags to MYOD data e.g. "unusual" can be a tick box in add_data
+		and would be helpful for automated budgeting.
 Improve sorting in trans_hist (e.g. if sort by category, should  be sorted by date within 
          each category)
 Improve get_ functions significantly to make MYOD's base more flexible and reliable
@@ -51,6 +54,7 @@ make save_data general for all computers including the optional use of automatin
 add button to trans_hist to export listing in readable format to an excel spreadsheet.
 make sure MYOD won't crash if computer doesn't have git installed
 Can add keyboard shortcuts by "Accelerator" object property
+Look into GUI Layout Toolbox for resizing sexily.
 
 ONE DAY
 ---------------------------------------------------------------------

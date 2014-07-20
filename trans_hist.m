@@ -80,10 +80,10 @@ handles.info.in = 6;
 handles.info.fund = 7;
 
 % prepare the table
-handles.small_pos = [55 50 608.5 350];
-handles.big_pos = [55 50 608.5 520];
-handles.table = uitable('Parent', handles.figure1, 'Position', ...
-    handles.big_pos);
+handles.small_pos = [0.07 0.02 0.87 0.68];
+handles.big_pos = [0.07 0.02 0.87 0.9];
+handles.table = uitable('Parent', handles.figure1, 'Units','normalized',...
+    'position',handles.big_pos);
 initialise_table(handles); %display table
 
 % prepare the data
@@ -737,55 +737,55 @@ set(handles.sub_filt,'Visible','on');
 %         handles - structure with handles and user data (see GUIDATA)
 function show_filt_Callback(hObject, eventdata, handles)
 
+% if get(hObject,'Value')
+%    set(hObject,'Value',false);
+%    msgbox('This exciting new feature is not yet ready for release'...
+%        ,'Coming Soon');
+% end
+
 if get(hObject,'Value')
-   set(hObject,'Value',false);
-   msgbox('This exciting new feature is not yet ready for release'...
-       ,'Coming Soon');
+    state = 'on';
+    % call callbacks
+    dates_filt_Callback(hObject,eventdata,handles);
+    cat_filt_Callback(hObject,eventdata,handles);
+    amount_filt_Callback(hObject,eventdata,handles);
+    
+    pos = handles.small_pos; % new dimensions of table
+    
+else
+    state = 'off';
+    % ensure optional menus are hidden
+    set(handles.text2,'Visible','off');
+    set(handles.text11,'Visible','off');
+    set(handles.text12,'Visible','off');
+    set(handles.text13,'Visible','off');
+    set(handles.text14,'Visible','off');
+    set(handles.from_date,'Visible','off');
+    set(handles.to_date,'Visible','off');
+    set(handles.sub_filt,'Visible','off');
+    set(handles.from_amount,'Visible','off');
+    set(handles.to_amount,'Visible','off');
+    
+    pos = handles.big_pos; %new dimensions of table
 end
 
-% if get(hObject,'Value')
-%     state = 'on';
-%     % call callbacks
-%     dates_filt_Callback(hObject,eventdata,handles);
-%     cat_filt_Callback(hObject,eventdata,handles);
-%     amount_filt_Callback(hObject,eventdata,handles);
-%     
-%     pos = handles.small_pos; % new dimensions of table
-%     
-% else
-%     state = 'off';
-%     % ensure optional menus are hidden
-%     set(handles.text2,'Visible','off');
-%     set(handles.text11,'Visible','off');
-%     set(handles.text12,'Visible','off');
-%     set(handles.text13,'Visible','off');
-%     set(handles.text14,'Visible','off');
-%     set(handles.from_date,'Visible','off');
-%     set(handles.to_date,'Visible','off');
-%     set(handles.sub_filt,'Visible','off');
-%     set(handles.from_amount,'Visible','off');
-%     set(handles.to_amount,'Visible','off');
-%     
-%     pos = handles.big_pos; %new dimensions of table
-% end
-% 
-% % display/hide filter options
-% set(handles.dates_filt,'Visible',state);
-% set(handles.cat_filt,'Visible',state);
-% set(handles.amount_filt,'Visible',state);
-% set(handles.cashflow_filt,'Visible',state);
-% set(handles.fund_filt,'Visible',state);
-% set(handles.reset,'Visible',state);
-% set(handles.show_all,'Visible',state);
-% set(handles.apply,'Visible',state);
-% set(handles.text5,'Visible',state);
-% set(handles.text6,'Visible',state);
-% set(handles.text7,'Visible',state);
-% set(handles.text8,'Visible',state);
-% set(handles.text9,'Visible',state);
-% 
-% %resize table
-% set(handles.table,'Position',pos);
+% display/hide filter options
+set(handles.dates_filt,'Visible',state);
+set(handles.cat_filt,'Visible',state);
+set(handles.amount_filt,'Visible',state);
+set(handles.cashflow_filt,'Visible',state);
+set(handles.fund_filt,'Visible',state);
+set(handles.reset,'Visible',state);
+set(handles.show_all,'Visible',state);
+set(handles.apply,'Visible',state);
+set(handles.text5,'Visible',state);
+set(handles.text6,'Visible',state);
+set(handles.text7,'Visible',state);
+set(handles.text8,'Visible',state);
+set(handles.text9,'Visible',state);
+
+%resize table
+set(handles.table,'Units','normalized','Position',pos);
 
 
 % --- Executes on button press in reset.

@@ -41,6 +41,7 @@ big_list{1} = ...%main 1, Shopping
     'Health/Beauty', ...%sub 8
     'Others', ...%sub 9
     'Bakery', ...%sub 10
+    'Electronics' ...%sub 11
     };
 big_list{2} = ...%main 2, Dining
     {'Restaurant',...%sub 1
@@ -123,10 +124,12 @@ big_list{12} = ...%main 12, Investments
     'Travel',... %sub 6
     'Accountant',...%sub 7
     'Lawyer',...%sub 8
-    'Research Tools'...%sub 9
+    'Research Tools',...%sub 9
+    'Company'...% sub 10; this is anything to do with building up reputation
     };
 big_list{13} = ... %main 13, Family
-    {'Ring'... %sub 1
+    {'Ring',... %sub 1
+    'Migration'...% sub 2
     };
 
 

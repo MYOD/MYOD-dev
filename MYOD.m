@@ -88,7 +88,7 @@ varargout{1} = handles.output;
 % inputs: handles - structure with handles and user data (see GUIDATA)
 function wedding(handles)
 
-last_arg = load_data('last_arg'); %first argument free dd/mm/yy 
+last_arg = load_data('last_arg'); %last day with an argument dd/mm/yy 
 
 if size(last_arg,1) == 0 %no last_arg available
     last_arg = datestr(today,'dd/mm/yy');
@@ -190,26 +190,40 @@ else
     use_git = false;
 end
 
-if use_git
-    set(handles.summary,'string',...
-        sprintf('PLEASE WAIT!\nMYOD data being uploaded to web'));
-    %for the silencing of system commands
-    if ispc
-        oblivion = 'NUL';
-    else
-        oblivion = '/dev/null';
-    end
-    data_path = fullfile(data_num('rel_path'),data_num('path'));
-    r = cd(data_path);
-    system(['git push origin master > ' oblivion]);
-    cd(r);
+selection = questdlg('Do you want to upload a copy of your data?',...
+    'Upload Data?',...
+    'Yes','No','Cancel','Yes');
+switch selection,
+    case 'Yes',
+        
+        if use_git
+            set(handles.summary,'string',...
+                sprintf('PLEASE WAIT!\nMYOD data being uploaded to web'));
+            %for the silencing of system commands
+            if ispc
+                oblivion = 'NUL';
+            else
+                oblivion = '/dev/null';
+            end
+            data_path = fullfile(data_num('rel_path'),data_num('path'));
+            r = cd(data_path);
+            system(['git push origin master > ' oblivion]);
+            cd(r);
+        else
+            errordlg('Sorry use_git is false. Please tell Peter.');
+        end
+        
+    case 'Cancel'
+        %don't even quit
+        return
 end
+
 % closes the figure
 delete(hObject);
 
 
 
-% function: speding_Callback
+% function: spending_Callback
 % last modified: 17/08/13
 % description: Executes on button press in spending
 % inputs: hObject - handle to about (see GCBO)
