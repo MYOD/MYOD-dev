@@ -32,5 +32,5 @@ switch descriptor
     case 's_columns' %scheduled payment - number of columns
         num = 9;
     case 'rel_path' %abs path to release version of MYOD
-        num = 'D:\MYOD';
+        num = 'E:\MYOD';
 end
