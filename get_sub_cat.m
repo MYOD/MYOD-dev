@@ -125,7 +125,8 @@ big_list{12} = ...%main 12, Investments
     'Accountant',...%sub 7
     'Lawyer',...%sub 8
     'Research Tools',...%sub 9
-    'Company'...% sub 10; this is anything to do with building up reputation
+    'Company',...% sub 10; this is anything to do with building up reputation
+    'Project costs'...%sub 11
     };
 big_list{13} = ... %main 13, Family
     {'Ring',... %sub 1
