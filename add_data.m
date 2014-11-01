@@ -357,8 +357,8 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
             
             if strcmp(user,'Confirm') % add to existing entry
                 expense(existing_row,data_num('amount')) = ...
-                    expense(existing_row,data_num('amount')) + ...
-                    newEntry(data_num('amount'));
+                    round((expense(existing_row,data_num('amount')) + ...
+                    newEntry(data_num('amount')))*100)/100;
             end
         else %not duplicate entry but check if only amount changed
             t_expense(:,data_num('amount')) = 0;
@@ -366,8 +366,8 @@ if ~void && newEntry(data_num('amount')) > 0 %save expense
             existing_row = ismember(t_expense,t_new,'rows');
             if sum(existing_row) %add amount to existing entry
                 expense(existing_row,data_num('amount')) = ...
-                    expense(existing_row,data_num('amount')) + ...
-                    newEntry(data_num('amount'));
+                    round((expense(existing_row,data_num('amount')) + ...
+                    newEntry(data_num('amount')))*100)/100;
             else % unique entry simple add to existing
                 expense = reverse_sort(expense,newEntry); %add newentry
             end
